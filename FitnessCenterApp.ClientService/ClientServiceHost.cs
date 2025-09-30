@@ -80,7 +80,7 @@ internal class ClientServiceHost(int port, string serviceName) : ApiServiceBase(
 		}
 		else
 		{
-			await WriteJsonResponse(stream, "404 Not Found", new { error = "Endpoint not found" });
+			await WriteJsonResponse(stream, HttpCodes.NotFound, new { error = "Endpoint not found" });
 		}
 	}
 
