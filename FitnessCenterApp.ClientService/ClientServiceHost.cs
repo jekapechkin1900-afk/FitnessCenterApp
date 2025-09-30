@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.RegularExpressions;
 using FitnessCenterApp.ClientService.Application;
 using FitnessCenterApp.ClientService.Application.Dtos;
 using FitnessCenterApp.ClientService.Infrastructure.Persistence.Repositories;
@@ -14,7 +15,7 @@ internal class ClientServiceHost(int port, string serviceName) : ApiServiceBase(
 
 	protected override async Task RouteApiRequest(Stream stream, HttpRequest request)
 	{
-		var membershipByIdPattern = new System.Text.RegularExpressions.Regex(@"^/api/memberships/([0-9a-fA-F\-]{36})$");
+		var membershipByIdPattern = new Regex(@"^/api/memberships/([0-9a-fA-F\-]{36})$");
 		var match = membershipByIdPattern.Match(request.Path);
 
 		Console.WriteLine($"==> Обработка API: Метод='{request.Method}', Путь='{request.Path}', Тело='{request.Body?.Length ?? 0} байт'");

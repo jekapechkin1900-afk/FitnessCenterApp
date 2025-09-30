@@ -9,11 +9,10 @@ public static class HttpParser
 	public static async Task<HttpRequest?> ParseRequest(Stream stream)
 	{
 		using var memoryStream = new MemoryStream();
-		var buffer = new byte[1024]; // Читаем по 1 KB за раз
+		var buffer = new byte[1024]; 
 		int headerEndPosition = -1;
 		int bytesRead;
 
-		// 1. Читаем из сетевого потока, пока не найдем конец заголовков
 		while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
 		{
 			memoryStream.Write(buffer, 0, bytesRead);
@@ -23,7 +22,6 @@ public static class HttpParser
 			{
 				break;
 			}
-			// Защита от слишком больших заголовков
 			if (memoryStream.Length > 8192) return null;
 		}
 
@@ -31,7 +29,6 @@ public static class HttpParser
 
 		var allBytesInMemory = memoryStream.ToArray();
 
-		// 2. Парсим заголовки
 		var headerBytes = allBytesInMemory.AsSpan(0, headerEndPosition).ToArray();
 		var headerText = Encoding.UTF8.GetString(headerBytes);
 		var headerLines = headerText.Split(new[] { "\r\n" }, StringSplitOptions.None);
@@ -47,7 +44,6 @@ public static class HttpParser
 			}
 		}
 
-		// 3. Аккуратно извлекаем тело запроса
 		string body = null;
 		if (headers.TryGetValue("content-length", out var contentLengthValue) &&
 			int.TryParse(contentLengthValue, out var contentLength) &&
@@ -55,14 +51,11 @@ public static class HttpParser
 		{
 			var bodyBuffer = new byte[contentLength];
 
-			// Определяем, сколько байт тела мы уже прочитали вместе с заголовками
 			int bodyStartPosition = headerEndPosition + HeaderSeparator.Length;
 			int initialBodyBytesCount = allBytesInMemory.Length - bodyStartPosition;
 
-			// Копируем уже прочитанную часть
 			Array.Copy(allBytesInMemory, bodyStartPosition, bodyBuffer, 0, initialBodyBytesCount);
 
-			// Дочитываем оставшуюся часть тела, если необходимо
 			int remainingBytes = contentLength - initialBodyBytesCount;
 			if (remainingBytes > 0)
 			{
@@ -70,7 +63,7 @@ public static class HttpParser
 				while (totalBytesReadForBody < contentLength)
 				{
 					int read = await stream.ReadAsync(bodyBuffer, totalBytesReadForBody, contentLength - totalBytesReadForBody);
-					if (read == 0) break; // Поток закончился
+					if (read == 0) break; 
 					totalBytesReadForBody += read;
 				}
 			}
