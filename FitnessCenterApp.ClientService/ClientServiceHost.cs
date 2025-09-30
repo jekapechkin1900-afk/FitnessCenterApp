@@ -26,7 +26,6 @@ internal class ClientServiceHost(int port, string serviceName) : ApiServiceBase(
 		}
 		else if (request.Path == "/api/memberships" && request.Method == "POST")
 		{
-			Console.WriteLine("==> Условие для POST-запроса выполнено!");
 			var dto = JsonSerializer.Deserialize<MembershipDtoForManipulation>(request.Body, _jsonOptions);
 			var createdEntity = _repository.Create(dto.ToEntity());
 			await WriteJsonResponse(stream, HttpCodes.Created, createdEntity.ToDto());
