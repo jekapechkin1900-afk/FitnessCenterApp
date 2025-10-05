@@ -6,14 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="SwaggerTemplate.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="SwaggerTemplate.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>
