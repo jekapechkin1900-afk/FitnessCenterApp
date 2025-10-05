@@ -7,18 +7,19 @@ namespace FitnessCenterApp.ClientService.Infrastructure.Persistence;
 
 public class ClientDbContext : DbContext
 {
+	public DbSet<Client> Clients { get; set; }
 	public DbSet<Membership> Memberships { get; set; }
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
-		var dbPath = Path.Combine(AppContext.BaseDirectory, "clients.db");
+		var dbPath = Path.Combine(AppContext.BaseDirectory, "clients_service.db");
 		optionsBuilder.UseSqlite($"Data Source={dbPath}");
 	}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		var membershipEntity = modelBuilder.Entity<Membership>();
-		membershipEntity.HasKey(m => m.Id);
-		membershipEntity.Property(m => m.Id).ValueGeneratedNever();
+		modelBuilder.Entity<Client>()
+		   .HasIndex(c => c.Email)
+		   .IsUnique();
 	}
 }

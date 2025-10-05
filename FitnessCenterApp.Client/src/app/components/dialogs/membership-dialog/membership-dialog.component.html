@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>Выдать новый абонемент</h1>
+<div mat-dialog-content>
+  <form [formGroup]="membershipForm" (ngSubmit)="onSubmit()" id="membershipForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Клиент</mat-label>
+      <mat-select formControlName="clientId" required>
+        <mat-option *ngFor="let client of clients" [value]="client.id">
+          {{ client.fullName }}
+        </mat-option>
+      </mat-select>
+      <mat-error>Выберите клиента</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Тип абонемента</mat-label>
+      <input matInput formControlName="type" required placeholder="Напр., 'Стандарт 1 месяц'">
+      <mat-error>Введите тип</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Цена, ₽</mat-label>
+      <input matInput formControlName="price" type="number" min="0" required>
+      <mat-error>Введите цену</mat-error>
+    </mat-form-field>
+
+    <div class="date-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Дата начала</mat-label>
+        <input matInput [matDatepicker]="pickerStart" formControlName="startDate" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+        <mat-error>Выберите дату</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Дата окончания</mat-label>
+        <input matInput [matDatepicker]="pickerEnd" formControlName="endDate" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+        <mat-error>Выберите дату</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Отмена</button>
+  <button mat-flat-button color="primary" type="submit" form="membershipForm" [disabled]="membershipForm.invalid">
+    Выдать абонемент
+  </button>
+</div>

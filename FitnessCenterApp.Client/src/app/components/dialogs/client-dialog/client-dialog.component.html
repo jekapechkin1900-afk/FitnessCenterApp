@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>{{ isEditMode ? 'Редактировать клиента' : 'Новый клиент' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" id="clientForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Полное имя</mat-label>
+      <input matInput formControlName="fullName" required>
+      <mat-error *ngIf="clientForm.get('fullName')?.hasError('required')">Это поле обязательно</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" required>
+      <mat-error *ngIf="clientForm.get('email')?.hasError('required')">Это поле обязательно</mat-error>
+      <mat-error *ngIf="clientForm.get('email')?.hasError('email')">Неверный формат email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Номер телефона</mat-label>
+      <input matInput formControlName="phoneNumber">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Отмена</button>
+  <button mat-flat-button color="primary" type="submit" form="clientForm" [disabled]="clientForm.invalid">
+    {{ isEditMode ? 'Сохранить' : 'Создать' }}
+  </button>
+</div>

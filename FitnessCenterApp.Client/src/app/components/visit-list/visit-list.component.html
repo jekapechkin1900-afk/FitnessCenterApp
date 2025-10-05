@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="toolbar">
+    <h2>Журнал посещений</h2>
+    <span class="spacer"></span>
+    <button mat-flat-button color="primary" (click)="openVisitDialog()">
+      <mat-icon>add</mat-icon>
+      Добавить посещение
+    </button>
+    <button mat-flat-button color="accent" [disabled]="selection.selected.length !== 1" (click)="editSelectedVisit()">
+      <mat-icon>edit</mat-icon>
+      Редактировать
+    </button>
+    <button mat-flat-button color="warn" [disabled]="selection.isEmpty()" (click)="deleteSelectedVisits()">
+      <mat-icon>delete_sweep</mat-icon>
+      Удалить выбранные ({{selection.selected.length}})
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+
+  <div *ngIf="!isLoading" class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="clientName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Клиент </th>
+        <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="visitTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Время визита </th>
+        <td mat-cell *matCellDef="let element"> {{element.visitTime | date:'dd.MM.yyyy HH:mm:ss'}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)" class="clickable-row"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Нет данных для отображения. Добавьте первое посещение.</td>
+      </tr>
+    </table>
+  </div>
+</div>

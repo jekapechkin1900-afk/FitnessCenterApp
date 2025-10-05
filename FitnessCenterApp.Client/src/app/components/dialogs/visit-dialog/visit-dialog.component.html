@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>{{ isEditMode ? 'Редактировать посещение' : 'Новое посещение' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="visitForm" (ngSubmit)="onSubmit()" id="visitForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Клиент</mat-label>
+      <mat-select formControlName="clientId" required>
+        <mat-option *ngFor="let client of clients" [value]="client.id">
+          {{ client.fullName }}
+        </mat-option>
+      </mat-select>
+      <mat-error>Выберите клиента</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Дата и время посещения</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="visitTime" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>Выберите дату</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Отмена</button>
+  <button mat-flat-button color="primary" type="submit" form="visitForm" [disabled]="visitForm.invalid">
+    {{ isEditMode ? 'Сохранить' : 'Создать' }}
+  </button>
+</div>

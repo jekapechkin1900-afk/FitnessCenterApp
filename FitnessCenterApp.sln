@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36511.14 d17.14
+VisualStudioVersion = 17.14.36511.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessCenterApp.ClientService", "FitnessCenterApp.ClientService\FitnessCenterApp.ClientService.csproj", "{DDF59CE9-6AE7-4CC1-97DC-A6701B402C89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessCenterApp.Shared", "FitnessCenterApp.Shared\FitnessCenterApp.Shared.csproj", "{27073E04-F92A-4AD0-A0C7-2645A4E96DAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessCenterApp.ProxyServer", "FitnessCenterApp.ProxyServer\FitnessCenterApp.ProxyServer.csproj", "{A3035E79-6374-4205-80DA-6BEA84F3E16D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessCenterApp.AnalyticsService", "FitnessCenterApp.AnalyticsService\FitnessCenterApp.AnalyticsService.csproj", "{056AB795-CBE2-465D-9DF2-5DDA672B8222}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "FitnessCenterApp.Client", "FitnessCenterApp.Client\FitnessCenterApp.Client.esproj", "{2A48E9FC-6032-C1DB-818A-CD99075D18DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,20 @@ Global
 		{27073E04-F92A-4AD0-A0C7-2645A4E96DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27073E04-F92A-4AD0-A0C7-2645A4E96DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27073E04-F92A-4AD0-A0C7-2645A4E96DAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3035E79-6374-4205-80DA-6BEA84F3E16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3035E79-6374-4205-80DA-6BEA84F3E16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3035E79-6374-4205-80DA-6BEA84F3E16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3035E79-6374-4205-80DA-6BEA84F3E16D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{056AB795-CBE2-465D-9DF2-5DDA672B8222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{056AB795-CBE2-465D-9DF2-5DDA672B8222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{056AB795-CBE2-465D-9DF2-5DDA672B8222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{056AB795-CBE2-465D-9DF2-5DDA672B8222}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A48E9FC-6032-C1DB-818A-CD99075D18DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A48E9FC-6032-C1DB-818A-CD99075D18DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A48E9FC-6032-C1DB-818A-CD99075D18DB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2A48E9FC-6032-C1DB-818A-CD99075D18DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A48E9FC-6032-C1DB-818A-CD99075D18DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A48E9FC-6032-C1DB-818A-CD99075D18DB}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

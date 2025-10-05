@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <a mat-button routerLink="/dashboard" class="logo-link">💪 Фитнес-центр</a>
+  <span class="spacer"></span>
+  <nav>
+    <nav>
+      <a mat-button routerLink="/clients" routerLinkActive="active-link">Клиенты</a>
+      <a mat-button routerLink="/memberships" routerLinkActive="active-link">Абонементы</a>
+      <a mat-button routerLink="/visits" routerLinkActive="active-link">Посещения</a>
+    </nav>
+  </nav>
+</mat-toolbar>
+
+<main class="content">
+  <router-outlet></router-outlet>
+</main>
